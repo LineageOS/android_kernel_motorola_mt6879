@@ -1,0 +1,6 @@
+config AW_RAMPING_SUPPORT
+	bool "AW Ramping Support"
+	default n
+	help
+	  Say Y here to enable support for AW ramping.
+	  If unsure, say N.

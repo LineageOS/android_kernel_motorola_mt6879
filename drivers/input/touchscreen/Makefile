@@ -125,3 +125,7 @@ endif
 ifneq ($(wildcard $(srctree)/$(src)/k6895v1_64_95t_alpha),)
 obj-$(CONFIG_TOUCHSCREEN_MT6895_ALPHA_SUPPORT) += k6895v1_64_95t_alpha/
 endif
+
+obj-$(CONFIG_TOUCHSCREEN_FTS_V3)		+= focaltech_touch_v3/
+obj-$(CONFIG_TOUCHSCREEN_GOODIX_BRL_MMI)	+= goodix_berlin_mmi/
+obj-$(CONFIG_INPUT_TOUCHSCREEN_MMI)		+= touchscreen_mmi/

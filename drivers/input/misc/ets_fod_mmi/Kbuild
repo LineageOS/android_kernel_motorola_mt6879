@@ -1,9 +1,3 @@
-# add -Wall to try to catch everything we can.
-EXTRA_CFLAGS += -Wall
-EXTRA_CFLAGS += -I$(TOP)/motorola/kernel/modules/include \
-		-I$(TOP)/motorola/kernel/modules/drivers/input/misc/ets_fod_mmi
-
-
 ets_fod_mmi-y += etxxx_fp.o
 
-obj-m += ets_fod_mmi.o
+obj-$(CONFIG_INPUT_ETS_FOD_MMI) += ets_fod_mmi.o

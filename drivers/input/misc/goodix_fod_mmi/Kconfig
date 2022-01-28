@@ -1,0 +1,6 @@
+config INPUT_GOODIX_FOD_MMI
+	tristate "MMI Goodix FOD sensor"
+	default n
+	help
+	  Say Y here if you wish to include support for MMI Goodix FOD sensor.
+	  If unsure, say N.

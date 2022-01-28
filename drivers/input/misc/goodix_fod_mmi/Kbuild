@@ -1,12 +1,5 @@
-# add -Wall to try to catch everything we can.
-EXTRA_CFLAGS += -Wall
-EXTRA_CFLAGS += -I$(ANDROID_BUILD_TOP)/motorola/kernel/modules/include \
+ccflags-$(CONFIG_MMI_RELAY) += -DMMI_RELAY_MODULE
 
-ifneq ($(filter m y,$(CONFIG_MMI_RELAY)),)
-	EXTRA_CFLAGS += -DMMI_RELAY_MODULE
-endif
 goodix_mtk_fod-y += gf_fod_tee.o
 
-obj-m += goodix_mtk_fod.o
-
-
+obj-$(CONFIG_INPUT_GOODIX_FOD_MMI) += goodix_mtk_fod.o

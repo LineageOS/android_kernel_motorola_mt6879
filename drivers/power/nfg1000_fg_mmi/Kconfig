@@ -1,0 +1,9 @@
+config  NFG1000_FG_MMI
+	tristate "NFG1000 FG MMI"
+	default n
+	help
+	  Say Y here if you have a nfg1000 fg mmi compatible
+	  device connected.
+
+	  This driver can also be built as a module.  If so, the module
+	  will be called nfg1000-fg-mmi.
