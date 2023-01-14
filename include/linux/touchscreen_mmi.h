@@ -382,6 +382,12 @@ enum ts_mmi_pm_mode {
 	TS_MMI_PM_ACTIVE
 	};
 
+enum ts_mmi_gesture_bit {
+	TS_MMI_GESTURE_ZERO = BIT(0),
+	TS_MMI_GESTURE_SINGLE = BIT(1),
+	TS_MMI_GESTURE_DOUBLE = BIT(2),
+};
+
 enum ts_mmi_panel_event {
 	TS_MMI_EVENT_PRE_DISPLAY_OFF,
 	TS_MMI_EVENT_PRE_DISPLAY_ON,
@@ -391,21 +397,6 @@ enum ts_mmi_panel_event {
 	TS_MMI_EVENT_UNKNOWN
 };
 
-<<<<<<< HEAD:include/linux/touchscreen_mmi.h
-=======
-enum ts_mmi_work {
-	TS_MMI_DO_POWER_ON,
-	TS_MMI_DO_RESUME,
-	TS_MMI_DO_SLEEP,
-	TS_MMI_DO_POWER_OFF,
-	TS_MMI_DO_PS,
-	TS_MMI_DO_REFRESH_RATE,
-	TS_MMI_DO_FPS,
-	TS_MMI_TASK_INIT,
-	TS_MMI_DO_LIQUID_DETECTION,
-};
-
->>>>>>> 24181c00c4f3 (input: touchscreen: touchscreen_mmi: move sleep to queue):motorola/include/linux/touchscreen_mmi.h
 #define TS_MMI_RESET_SOFT	0
 #define TS_MMI_RESET_HARD	1
 #define TS_MMI_POWER_OFF	0

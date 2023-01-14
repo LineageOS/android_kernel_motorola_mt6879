@@ -51,6 +51,7 @@ enum ts_mmi_work {
 	TS_MMI_DO_REFRESH_RATE,
 	TS_MMI_DO_FPS,
 	TS_MMI_TASK_INIT,
+	TS_MMI_SET_GESTURES,
 };
 
 static int ts_mmi_queued_stop(struct ts_mmi_dev *touch_cdev) {
@@ -431,6 +432,17 @@ static void ts_mmi_worker_func(struct work_struct *w)
 				dev_info(DEV_MMI, "%s: register panel notifier\n", __func__);
 			}
 				break;
+
+		case TS_MMI_SET_GESTURES:
+			if (!atomic_read(&touch_cdev->touch_stopped))
+				break;
+
+			ts_mmi_queued_power_on(touch_cdev);
+			ts_mmi_queued_resume(touch_cdev);
+			ts_mmi_queued_stop(touch_cdev);
+			ts_mmi_queued_power_off(touch_cdev);
+
+			break;
 
 		default:
 			dev_dbg(DEV_MMI, "%s: unknown command %d\n", __func__, cmd);
