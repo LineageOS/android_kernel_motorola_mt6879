@@ -595,6 +595,8 @@ struct ts_mmi_dev {
 	bool fps_state;
 	bool delay_baseline_update;
 
+	unsigned long cmd_pending;
+
 	/*
 	 * sys entey variable
 	 */
