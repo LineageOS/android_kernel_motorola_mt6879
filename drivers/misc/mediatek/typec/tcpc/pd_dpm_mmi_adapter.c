@@ -289,5 +289,4 @@ int mmi_notify_pe_ready(struct pd_port *pd_port,
     }
     return 0;
 }
-
 #endif /* CONFIG_SUPPORT_MMI_ADAPTER */
