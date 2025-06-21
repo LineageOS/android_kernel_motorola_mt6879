@@ -654,6 +654,8 @@ extern void _wake_up_charger(struct mtk_charger *info);
 
 /* functions for other */
 extern int mtk_chg_enable_vbus_ovp(bool enable);
+#if IS_ENABLED(CONFIG_MTK_HANG_DETECT)
 extern void aee_kernel_RT_Monitor_api_factory(void);
+#endif
 
 #endif /* __MTK_CHARGER_H */
