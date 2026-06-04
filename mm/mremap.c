@@ -340,6 +340,10 @@ static inline bool move_normal_pmd(struct vm_area_struct *vma,
 }
 #endif
 
+/*
+ * Speculative page fault handlers will not detect page table changes done
+ * without ptl locking.
+ */
 #if CONFIG_PGTABLE_LEVELS > 2 && defined(CONFIG_HAVE_MOVE_PUD) && \
 		!defined(CONFIG_SPECULATIVE_PAGE_FAULT)
 static bool move_normal_pud(struct vm_area_struct *vma, unsigned long old_addr,

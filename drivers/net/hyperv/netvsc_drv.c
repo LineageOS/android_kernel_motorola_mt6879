@@ -2345,6 +2345,20 @@ static struct net_device *get_netvsc_byslot(const struct net_device *vf_netdev)
 			return ndev;
 	}
 
+	/* Fallback path to check synthetic vf with help of mac addr.
+	 * Because this function can be called before vf_netdev is
+	 * initialized (NETDEV_POST_INIT) when its perm_addr has not been copied
+	 * from dev_addr, also try to match to its dev_addr.
+	 * Note: On Hyper-V and Azure, it's not possible to set a MAC address
+	 * on a VF that matches to the MAC of a unrelated NETVSC device.
+	 */
+	list_for_each_entry(ndev_ctx, &netvsc_dev_list, list) {
+		ndev = hv_get_drvdata(ndev_ctx->device_ctx);
+		if (ether_addr_equal(vf_netdev->perm_addr, ndev->perm_addr) ||
+		    ether_addr_equal(vf_netdev->dev_addr, ndev->perm_addr))
+			return ndev;
+	}
+
 	netdev_notice(vf_netdev,
 		      "no netdev found for vf serial:%u\n", serial);
 	return NULL;
@@ -2449,6 +2463,11 @@ static int netvsc_vf_changed(struct net_device *vf_netdev, unsigned long event)
 
 	if (net_device_ctx->data_path_is_vf == vf_is_up)
 		return NOTIFY_OK;
+
+	if (vf_is_up && !net_device_ctx->vf_alloc) {
+		netdev_info(ndev, "Waiting for the VF association from host\n");
+		wait_for_completion(&net_device_ctx->vf_add);
+	}
 
 	if (vf_is_up && !net_device_ctx->vf_alloc) {
 		netdev_info(ndev, "Waiting for the VF association from host\n");

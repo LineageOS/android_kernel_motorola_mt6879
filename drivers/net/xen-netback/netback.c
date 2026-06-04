@@ -113,6 +113,8 @@ static void make_tx_response(struct xenvif_queue *queue,
 
 static void xenvif_idx_unmap(struct xenvif_queue *queue, u16 pending_idx);
 
+static void xenvif_idx_unmap(struct xenvif_queue *queue, u16 pending_idx);
+
 static inline int tx_work_todo(struct xenvif_queue *queue);
 
 static inline unsigned long idx_to_pfn(struct xenvif_queue *queue,

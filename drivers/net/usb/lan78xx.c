@@ -2289,7 +2289,6 @@ static int lan78xx_change_mtu(struct net_device *netdev, int new_mtu)
 	int ll_mtu = new_mtu + netdev->hard_header_len;
 	int old_hard_mtu = dev->hard_mtu;
 	int old_rx_urb_size = dev->rx_urb_size;
-	int ret;
 
 	/* no second zero-length packet read wanted after mtu-sized packets */
 	if ((ll_mtu % dev->maxpacket) == 0)
@@ -4222,7 +4221,7 @@ static int lan78xx_set_suspend(struct lan78xx_net *dev, u32 wol)
 
 		/* set WUF_CFG & WUF_MASK for IPv4 Multicast */
 		crc = lan78xx_wakeframe_crc16(ipv4_multicast, 3);
-		ret = lan78xx_write_reg(dev, WUF_CFG(mask_index),
+		lan78xx_write_reg(dev, WUF_CFG(mask_index),
 					WUF_CFGX_EN_ |
 					WUF_CFGX_TYPE_MCAST_ |
 					(0 << WUF_CFGX_OFFSET_SHIFT_) |
@@ -4247,7 +4246,7 @@ static int lan78xx_set_suspend(struct lan78xx_net *dev, u32 wol)
 
 		/* for IPv6 Multicast */
 		crc = lan78xx_wakeframe_crc16(ipv6_multicast, 2);
-		ret = lan78xx_write_reg(dev, WUF_CFG(mask_index),
+		lan78xx_write_reg(dev, WUF_CFG(mask_index),
 					WUF_CFGX_EN_ |
 					WUF_CFGX_TYPE_MCAST_ |
 					(0 << WUF_CFGX_OFFSET_SHIFT_) |
@@ -4288,7 +4287,7 @@ static int lan78xx_set_suspend(struct lan78xx_net *dev, u32 wol)
 		 * for packettype (offset 12,13) = ARP (0x0806)
 		 */
 		crc = lan78xx_wakeframe_crc16(arp_type, 2);
-		ret = lan78xx_write_reg(dev, WUF_CFG(mask_index),
+		lan78xx_write_reg(dev, WUF_CFG(mask_index),
 					WUF_CFGX_EN_ |
 					WUF_CFGX_TYPE_ALL_ |
 					(0 << WUF_CFGX_OFFSET_SHIFT_) |

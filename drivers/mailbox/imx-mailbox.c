@@ -331,6 +331,8 @@ static int imx_mu_startup(struct mbox_chan *chan)
 		break;
 	}
 
+	priv->suspend = true;
+
 	return 0;
 }
 
@@ -547,6 +549,8 @@ static int imx_mu_probe(struct platform_device *pdev)
 		goto disable_runtime_pm;
 
 	clk_disable_unprepare(priv->clk);
+
+	priv->suspend = false;
 
 	return 0;
 

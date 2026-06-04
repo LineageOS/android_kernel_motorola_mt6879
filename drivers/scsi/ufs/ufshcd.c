@@ -51,7 +51,12 @@
 #define QUERY_REQ_TIMEOUT 1500 /* 1.5 seconds */
 
 /* Task management command timeout */
+#if IS_ENABLED(CONFIG_MTK_UFS_DEBUG)
+/* Max TM cmd timeout = 1.3s * 8QueueDepth = 10.4s */
+#define TM_CMD_TIMEOUT	10400 /* msecs */
+#else
 #define TM_CMD_TIMEOUT	100 /* msecs */
+#endif
 
 /* maximum number of retries for a general UIC command  */
 #define UFS_UIC_COMMAND_RETRIES 3
@@ -145,7 +150,10 @@ enum {
 	UFSHCD_STATE_EH_SCHEDULED_NON_FATAL,
 };
 
-
+/* UFSHCD error handling flags */
+enum {
+	UFSHCD_EH_IN_PROGRESS = (1 << 0),
+};
 
 /* UFSHCD UIC layer error flags */
 enum {
@@ -158,6 +166,12 @@ enum {
 	UFSHCD_UIC_PA_GENERIC_ERROR = (1 << 6), /* Generic PA error */
 };
 
+#define ufshcd_set_eh_in_progress(h) \
+	((h)->eh_flags |= UFSHCD_EH_IN_PROGRESS)
+#define ufshcd_eh_in_progress(h) \
+	((h)->eh_flags & UFSHCD_EH_IN_PROGRESS)
+#define ufshcd_clear_eh_in_progress(h) \
+	((h)->eh_flags &= ~UFSHCD_EH_IN_PROGRESS)
 
 struct ufs_pm_lvl_states ufs_pm_lvl_states[] = {
 	{UFS_ACTIVE_PWR_MODE, UIC_LINK_ACTIVE_STATE},
