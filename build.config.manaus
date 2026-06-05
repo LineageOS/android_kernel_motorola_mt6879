@@ -1,0 +1,50 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.lto_thin
+
+DEFCONFIG="manaus_defconfig"
+GKI_FRAGMENT_DEFCONFIG="${KERNEL_DIR}/arch/arm64/configs/vendor/manaus.config"
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/${GKI_FRAGMENT_DEFCONFIG}"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
+
+KERNEL_DIR=kernel-5.10
+
+FILES="
+arch/arm64/boot/Image.gz
+arch/arm64/boot/dts/mediatek/mt6879.dtb
+vmlinux
+System.map
+vmlinux.symvers
+modules.builtin
+modules.builtin.modinfo
+"
+
+MAKE_GOALS="${MAKE_GOALS} Image.gz modules mediatek/mt6879.dtb"
+
+ABI_OUT_TAG="mtk"
+KMI_SYMBOL_LIST=android/abi_gki_aarch64_mtk
+GKI_MODULES_LIST=android/gki_aarch64_modules
+ABI_DEFINITION=android/abi_gki_aarch64.xml
+
+# Strip kernel modules
+DO_NOT_STRIP_MODULES=0
+
+export CONFIG_MTK_FM_CHIP="connac2x"
+export MODULE_NAME="wlan_drv_gen4m_6879"
+export MTK_ANDROID_EMI="y"
+export WIFI_IP_SET="1"
+export MTK_ANDROID_WMT="y"
+export WLAN_CHIP_ID="6879"
+export MTK_COMBO_CHIP="CONNAC2X2_SOC7_0"
+export CONFIG_MTK_COMBO_WIFI_HIF="axi"
+export MTK_WLAN_SERVICE="yes"
+
+# Adaptor
+export ADAPTOR_MODULE_NAME="wmt_chrdev_wifi"
+
+# Bluetooth configuration
+export BT_PLATFORM="connac1x"
+
+# FMRadio
+export CONFIG_MTK_FMRADIO=m
+export CONFIG_MTK_FM_CHIP="MT6635_FM"
