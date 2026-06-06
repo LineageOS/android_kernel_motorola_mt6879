@@ -46,8 +46,12 @@
  * ---------------------------------------------------------------------------*/
 
 #define ARRAY_SIZE(A)	(sizeof(A) / sizeof((A)[0]))
+#ifndef MIN
 #define MIN(a, b)	((a) < (b) ? (a) : (b))
+#endif
+#ifndef MAX
 #define MAX(a, b)	((a) > (b) ? (a) : (b))
+#endif
 
 static void __attribute__((noreturn))
 do_die(const char *format, va_list va, int err)

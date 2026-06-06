@@ -146,7 +146,9 @@ int ignore_stdin;
 #define MSR_CORE_ENERGY_STAT	0xc001029a
 #define MSR_PKG_ENERGY_STAT	0xc001029b
 
+#ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
+#endif
 
 /*
  * buffer size used by sscanf() for added column names

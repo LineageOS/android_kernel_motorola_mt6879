@@ -34,9 +34,12 @@ struct device *gdev;
 
 #define CPU_KIR_USB 6
 #define CPU_MAX_KIR 12
+#ifndef MAX
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+#ifndef MIN
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))
-
+#endif
 #define LOG_BUF_SIZE (128)
 static struct ppm_limit_data *freq_set[CPU_MAX_KIR];
 static struct ppm_limit_data *current_freq;

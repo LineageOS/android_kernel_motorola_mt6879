@@ -47,7 +47,9 @@
 #define is_dvfs_in_progress()    (spm_read(DVFSRC_LEVEL) & 0xFFFF)
 #define get_dvfs_level()         (spm_read(DVFSRC_LEVEL) >> 16)
 
+#ifndef MIN
 #define MIN(a, b)                ((a) >= (b) ? (b) : (a))
+#endif
 
 /*
  * only for internal debug

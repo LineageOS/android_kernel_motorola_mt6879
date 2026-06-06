@@ -15,7 +15,9 @@
 
 #include "perf_ioctl.h"
 
+#ifndef MAX
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
 
 /*tchbst 100 ms*/
 #define TOUCH_TIMEOUT_NSEC 100000000
