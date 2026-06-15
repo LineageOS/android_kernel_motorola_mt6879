@@ -4,4 +4,4 @@ EXTRA_CFLAGS += -I$(ANDROID_BUILD_TOP)/kernel-5.10/include \
 		-I$(ANDROID_BUILD_TOP)/kernel-5.10/drivers/power/bq25980_mmi \
 		-I$(ANDROID_BUILD_TOP)/kernel-5.10/drivers/power/supply
 
-obj-$(CONFIG_BQ25880_MMI) += bq25980_mmi.o
+obj-$(CONFIG_BQ25980_MMI) += bq25980_mmi.o
