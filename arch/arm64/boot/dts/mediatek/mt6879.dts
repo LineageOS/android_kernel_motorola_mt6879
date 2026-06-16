@@ -335,7 +335,7 @@
 	chosen: chosen {
 		mkp,policy = <0x0001ffe3>;
 		bootargs = "console=tty0 root=/dev/ram \
-			vmalloc=400M swiotlb=noforce allow_file_spec_access\
+			swiotlb=noforce allow_file_spec_access\
 			8250.nr_uarts=4 \
 			transparent_hugepage=never \
 			firmware_class.path=/vendor/firmware pelt=8 ";
