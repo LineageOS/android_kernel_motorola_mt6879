@@ -20,3 +20,4 @@ obj-$(CONFIG_NFC_ST95HF)	+= st95hf/
 obj-$(CONFIG_NXP_ESE_P73)	+= nxpese/
 obj-$(CONFIG_NXP_NFC_I2C)	+= nxpI2C/
 obj-$(CONFIG_NFC_ST54NFC)	+= st54nfc/
+obj-$(CONFIG_NFC_PN557)		+= pn557/

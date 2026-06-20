@@ -62,4 +62,5 @@ source "drivers/nfc/st95hf/Kconfig"
 source "drivers/nfc/nxpese/Kconfig"
 source "drivers/nfc/nxpI2C/Kconfig"
 source "drivers/nfc/st54nfc/Kconfig"
+source "drivers/nfc/pn557/Kconfig"
 endmenu
