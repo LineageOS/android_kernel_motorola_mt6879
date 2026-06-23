@@ -187,8 +187,19 @@ int gps_dl_hw_gps_common_on(void)
 	/*wake up 3T 32k clock to ready*/
 	GDL_WAIT_US(200);
 
-	/* Poll conninfra hw version */
+#if GPS_DL_HAS_CONNINFRA_DRV
+	/* Use conninfra driver API to get HW version instead of direct MMIO,
+	 * because the conninfra bus may not be accessible via GPS GDL's
+	 * direct register read at this point (bus clock/status not ready).
+	 */
+	poll_ver = conninfra_get_ic_info(CONNSYS_HW_VER);
+	poll_okay = (poll_ver == GDL_HW_CONN_INFRA_VER_MT6983);
+	if (poll_okay)
+		GDL_LOGI("conn_infra_ver via api = 0x%08x", poll_ver);
+#else
+	/* Poll conninfra hw version via direct MMIO */
 	GDL_HW_CHECK_CONN_INFRA_VER(&poll_okay, &poll_ver);
+#endif
 	if (!poll_okay) {
 		GDL_LOGE("_fail_conn_hw_ver_not_okay, poll_ver = 0x%08x", poll_ver);
 		goto _fail_conn_hw_ver_not_okay;
