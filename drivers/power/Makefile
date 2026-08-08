@@ -7,3 +7,4 @@ obj-$(CONFIG_NFG1000_FG_MMI)	+= nfg1000_fg_mmi/
 obj-$(CONFIG_QPNP_ADAPTIVE_CHARGE)	+= qpnp_adaptive_charge/
 obj-$(CONFIG_SMART_BATTERY)	+= smart_battery/
 obj-$(CONFIG_BQ25980_MMI)	+= bq25980_mmi/
+obj-$(CONFIG_CPS4038_MMI)	+= cps4038_mmi/

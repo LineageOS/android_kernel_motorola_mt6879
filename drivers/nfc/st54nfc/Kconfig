@@ -1,0 +1,2 @@
+config NFC_ST54NFC
+	tristate "st54nfc :D"

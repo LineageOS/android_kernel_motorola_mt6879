@@ -1,1 +1,2 @@
 source "drivers/misc/awinic/sarsensor/Kconfig"
+source "drivers/misc/awinic/aw86715/Kconfig"
